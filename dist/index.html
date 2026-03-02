@@ -1,76 +1,193 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rouaa老師的簡易計算機</title>
   <link rel="stylesheet" href="./style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      text-shadow: 0 0 20px rgba(160, 120, 255, 0.6);
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(120, 80, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 320px;
+    }
+
+    #display {
+      width: 100%;
+      height: 72px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 300;
+      text-align: right;
+      padding: 0 18px;
+      outline: none;
+      letter-spacing: 0.04em;
+      caret-color: transparent;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .btn {
+      height: 68px;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.3rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+      outline: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn:active {
+      transform: scale(0.93);
+    }
+
+    /* 數字按鈕 */
+    .btn-num {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-num:hover {
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 運算符按鈕 */
+    .btn-op {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.45);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-op:hover {
+      background: linear-gradient(135deg, #8b5cf6, #c084fc);
+      box-shadow: 0 6px 22px rgba(124, 58, 237, 0.6);
+    }
+
+    /* 清除按鈕 */
+    .btn-clear {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-clear:hover {
+      background: linear-gradient(135deg, #ef4444, #f87171);
+      box-shadow: 0 6px 22px rgba(220, 38, 38, 0.55);
+    }
+
+    /* 等號按鈕 */
+    .btn-eq {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.4);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-eq:hover {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      box-shadow: 0 6px 22px rgba(5, 150, 105, 0.55);
+    }
+  </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>rouaa老師的簡易計算機</title>
-    <style>
-        input[type="button"] {
-            width: 50px;
-            height: 50px;
-        }
-        input[type="text"] {
-            width: 200px;
-            height: 50px;
-        }
-    </style>
-</head>
-<body>
-    <h1>rouaa老師的簡易計算機</h1>
-  <hr>
-   <hr>
-     <hr>
-    <input type="text" id="display" readonly>
-    <br>
-    <input type="button" value="1" onclick="appendToDisplay('1')">
-    <input type="button" value="2" onclick="appendToDisplay('2')">
-    <input type="button" value="3" onclick="appendToDisplay('3')">
-    <input type="button" value="+" onclick="appendToDisplay('+')">
-    <br>
-    <input type="button" value="4" onclick="appendToDisplay('4')">
-    <input type="button" value="5" onclick="appendToDisplay('5')">
-    <input type="button" value="6" onclick="appendToDisplay('6')">
-    <input type="button" value="-" onclick="appendToDisplay('-')">
-    <br>
-    <input type="button" value="7" onclick="appendToDisplay('7')">
-    <input type="button" value="8" onclick="appendToDisplay('8')">
-    <input type="button" value="9" onclick="appendToDisplay('9')">
-    <input type="button" value="*" onclick="appendToDisplay('*')">
-    <br>
-    <input type="button" value="0" onclick="appendToDisplay('0')">
-    <input type="button" value="C" onclick="clearDisplay()">
-    <input type="button" value="=" onclick="calculate()">
-    <input type="button" value="/" onclick="appendToDisplay('/')">
-    <br>
-    <script>
-        function appendToDisplay(value) {
-            document.getElementById("display").value += value;
-        }
+  <h1>rouaa老師的簡易計算機</h1>
+  <div class="calculator">
+    <input type="text" id="display" readonly placeholder="0">
+    <div class="btn-grid">
+      <!-- Row 1 -->
+      <button class="btn btn-num" onclick="appendToDisplay('1')">1</button>
+      <button class="btn btn-num" onclick="appendToDisplay('2')">2</button>
+      <button class="btn btn-num" onclick="appendToDisplay('3')">3</button>
+      <button class="btn btn-op"  onclick="appendToDisplay('+')">+</button>
+      <!-- Row 2 -->
+      <button class="btn btn-num" onclick="appendToDisplay('4')">4</button>
+      <button class="btn btn-num" onclick="appendToDisplay('5')">5</button>
+      <button class="btn btn-num" onclick="appendToDisplay('6')">6</button>
+      <button class="btn btn-op"  onclick="appendToDisplay('-')">−</button>
+      <!-- Row 3 -->
+      <button class="btn btn-num" onclick="appendToDisplay('7')">7</button>
+      <button class="btn btn-num" onclick="appendToDisplay('8')">8</button>
+      <button class="btn btn-num" onclick="appendToDisplay('9')">9</button>
+      <button class="btn btn-op"  onclick="appendToDisplay('*')">×</button>
+      <!-- Row 4 -->
+      <button class="btn btn-num" onclick="appendToDisplay('0')">0</button>
+      <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+      <button class="btn btn-eq"  onclick="calculate()">=</button>
+      <button class="btn btn-op"  onclick="appendToDisplay('/')">÷</button>
+    </div>
+  </div>
 
-        function clearDisplay() {
-            document.getElementById("display").value = '';
-        }
+  <script>
+    function appendToDisplay(value) {
+      var d = document.getElementById("display");
+      if (d.value === '0' && value !== '.') {
+        d.value = value;
+      } else {
+        d.value += value;
+      }
+    }
 
-        function calculate() {
-            var expression = document.getElementById("display").value;
-            try {
-                document.getElementById("display").value = eval(expression);
-            } catch (e) {
-                document.getElementById("display").value = 'Error';
-            }
-        }
-    </script>
-</body>
-</html>
-<!-- partial -->
-  
+    function clearDisplay() {
+      document.getElementById("display").value = '';
+    }
+
+    function calculate() {
+      var expression = document.getElementById("display").value;
+      try {
+        var result = eval(expression);
+        document.getElementById("display").value = result;
+      } catch (e) {
+        document.getElementById("display").value = 'Error';
+      }
+    }
+  </script>
 </body>
 </html>

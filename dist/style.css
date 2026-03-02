@@ -1,1 +1,5 @@
-body { background-color:#Fee5F5}
+/* Modern dark gradient background */
+body {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
+}
